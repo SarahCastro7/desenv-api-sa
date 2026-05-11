@@ -1,0 +1,1 @@
+import frutasService from '../services/frutasService.js';
