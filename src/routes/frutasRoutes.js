@@ -1,8 +1,8 @@
 import express from "express";
-import { filmesService } from "../services/filmesServices.js";
+import { frutasService } from "../services/frutasServices.js";
 
 
-const routeFilmes = express.Router();
+const routeFrutas = express.Router();
 
 // GET - listar todas as frutas
 routeFrutas.get("/", async (req, res) => {
@@ -29,13 +29,24 @@ routeFrutas.get("/:id", async (req, res) => {
 
 // POST - criar fruta
 routeFrutas.post("/", async (req, res) => {
+
     const { nome } = req.body;
+
+    if (!nome) {
+        return res.status(400).json({
+            message: "Nome é obrigatório"
+        });
+    }
+
+    const fruta = await frutasService.create(nome);
+
+    res.status(201).json(fruta);
 });
 
 // PATCH - atualização parcial
 routeFrutas.patch("/:id", async (req, res) => {
-    const { id } = req.params;
-
+    
+    const { id } = req.params
     const frutaAtualizada = await frutasService.updateFruta(id, req.body);
 
     if (!frutaAtualizada) {
@@ -63,11 +74,12 @@ routeFrutas.put("/:id", async (req, res) => {
 
 // DELETE
 routeFrutas.delete("/:id", async (req, res) => {
-    const { id } = req.params;
 
+    const { id } = req.params;
     const removido = await frutasService.deleteFruta(id);
 
     // Mensagem de erro em JSON caso não encontre
+
     if (!removido) {
         return res.status(404).json({
             message: "Erro: Fruta não encontrada para remoção."
