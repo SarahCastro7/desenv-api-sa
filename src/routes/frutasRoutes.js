@@ -1,7 +1,6 @@
 import express from "express";
 import { frutasService } from "../services/frutasServices.js";
 
-
 const routeFrutas = express.Router();
 
 // GET - listar todas as frutas
