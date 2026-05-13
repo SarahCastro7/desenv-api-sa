@@ -19,7 +19,7 @@ class FrutasService {
     async getByIdFrutas(id) {
         try {
             const result = await pool.query(
-                'SELECT * FROM frutas WHERE id = $1',
+                'SELECT * FROM frutas',
                 [id]
             )  
         } catch (error) {

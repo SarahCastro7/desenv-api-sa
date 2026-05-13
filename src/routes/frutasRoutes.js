@@ -33,7 +33,7 @@ routeFrutas.post("/", async (req, res) => {
 
     if (!nome) {
         return res.status(400).json({
-            message: "Nome é obrigatório"
+            message: "nome obrigatório"
         });
     }
 
@@ -61,7 +61,7 @@ routeFrutas.put("/:id", async (req, res) => {
 
     const frutaAtualizada = await frutasService.updateFruta(id, {
         nome: nome.trim(),
-        categoria: categoria.trim()
+        quantidade: quantidade.trim()
     });
 
     if (!frutaAtualizada) {
