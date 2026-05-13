@@ -3,17 +3,13 @@ import { frutasService } from "../services/frutasServices.js";
 
 const routeFrutas = express.Router();
 
-// GET - listar todas as frutas
 routeFrutas.get("/", async (req, res) => {
     const frutas = await frutasService.getAll();
     res.json(frutas);
 });
 
-// GET por ID
 routeFrutas.get("/:id", async (req, res) => {
     const { id } = req.params;
-
-    // Validação: verifica se é número e se é positivo
 
     if (isNaN(id) || Number(id) <= 0) {
         return res.status(400).json({ message: "ID inválido. Deve ser um número positivo." });
@@ -26,7 +22,6 @@ routeFrutas.get("/:id", async (req, res) => {
     res.json(fruta);
 });
 
-// POST - criar fruta
 routeFrutas.post("/", async (req, res) => {
 
     const { nome } = req.body;
@@ -42,7 +37,6 @@ routeFrutas.post("/", async (req, res) => {
     res.status(201).json(fruta);
 });
 
-// PATCH - atualização parcial
 routeFrutas.patch("/:id", async (req, res) => {
     
     const { id } = req.params
@@ -55,7 +49,6 @@ routeFrutas.patch("/:id", async (req, res) => {
     res.json(frutaAtualizada);
 });
 
-// PUT - substituição completa
 routeFrutas.put("/:id", async (req, res) => {
     const { id } = req.params;
 
@@ -71,7 +64,6 @@ routeFrutas.put("/:id", async (req, res) => {
     res.json(frutaAtualizada);
 });
 
-// DELETE
 routeFrutas.delete("/:id", async (req, res) => {
 
     const { id } = req.params;
